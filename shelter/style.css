@@ -498,6 +498,59 @@ section {
     color: #B2B2B2;
 }
 
+/* FOOTER */
+
+
+footer {
+    background: url(assets/footerback.png) center/cover no-repeat;
+}
+
+.footer_wrapper {
+    padding: 40px 0 60px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 140px;
+}
+
+.footer_contacts, .footer_address {
+    height: 234px;
+    /* padding-top: 10px;  */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    line-height: 23px;
+    letter-spacing: 0.06em;
+}
+
+.footer_title {
+    font-size: 35px;
+    color: #FFFFFF;
+    line-height: 45.5px;
+    letter-spacing: 0.06em;
+}
+
+.footer_email, .footer_number, .footer_street {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: Georgia;
+    font-size: 20px;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    color: #F1CDB3;
+}
+
+.footer_image {
+    margin: 0 0 -60px 17px;;
+    display: flex;
+    align-items: flex-end;
+    align-self: flex-end;
+}
+
+
+
+
 
 
 
