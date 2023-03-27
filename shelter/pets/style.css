@@ -80,7 +80,7 @@ header {
 
 .header_navigation li:after{
     position: absolute;
-    bottom: -6px;
+    bottom: -3px;
     left: 0;
     content: "";
     background-color: #F1CDB3;
@@ -108,7 +108,7 @@ header {
 
 .header_navigation_list .active:after {
     position: absolute;
-    bottom: -6px;
+    bottom: -3px;
     left: 0;
     content: "";
     background-color: #F1CDB3;
@@ -212,11 +212,13 @@ main {
 }
 
 .main_switcher_item {
+    padding-bottom: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 52px;
     height: 52px;
+    color: #CDCDCD;
     border: 2px solid #CDCDCD;
     border-radius: 100%;
     cursor: pointer;
@@ -224,8 +226,14 @@ main {
 }
 
 .main_switcher_item.current {
+    color: #292929;
     border-color: #F1CDB3;
     background-color: #F1CDB3;
+}
+
+.main_switcher_item.next, .main_switcher_item.last {
+    color: #292929;
+    border-color: #F1CDB3;
 }
 
 .main_switcher_item.next:hover, .main_switcher_item.last:hover {
@@ -234,7 +242,7 @@ main {
 }
 
 
-.main_switcher_item.next:active, .main_switcher_item.next:active {
+.main_switcher_item.next:active, .main_switcher_item.last:active {
     border-color: #F1CDB3;
     background-color: #F1CDB3;
 }

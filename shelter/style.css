@@ -8,6 +8,7 @@
 
 html {
     scroll-behavior: smooth;
+    user-select: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -26,12 +27,17 @@ body {
 }
 
 
-header {
+/* header {
     height: 908px;
     background-image: url(assets/headerback.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+} */
+
+header {
+    height: 908px;
+    background: radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, #211F20;
 }
 
 .header_wrapper {
@@ -46,8 +52,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    
 }
 
 .header_logo {
@@ -83,7 +87,7 @@ header {
 
 .header_navigation li:after{
     position: absolute;
-    bottom: -6px;
+    bottom: -3px;
     left: 0;
     content: "";
     background-color: #F1CDB3;
@@ -97,13 +101,28 @@ header {
     position: relative;
     text-decoration: none;
     line-height: 1.6em;
-
 }
 
 .header_navigation_link {
     text-decoration: none;
     color: #CDCDCD;
     transition: all .2s linear
+}
+
+.header_navigation_list .active a {
+    color: #FAFAFA;
+}
+
+.header_navigation_list .active:after {
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    content: "";
+    background-color: #F1CDB3;
+    height: 3px;
+    width: 100%;
+    transition: all .2s linear;
+    opacity: 1;
 }
 
 .header_navigation_link:hover {
@@ -280,6 +299,7 @@ section {
     letter-spacing: 0.07em;
     background-color: #FAFAFA;
     cursor: pointer;
+    border-radius: 9px;
     transition: all .2s linear;
 }
 
@@ -509,7 +529,7 @@ section {
 
 
 footer {
-    background: url(assets/footerback.png) center/cover no-repeat;
+    background: radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
 }
 
 .footer_wrapper {
