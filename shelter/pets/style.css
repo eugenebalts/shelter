@@ -184,6 +184,11 @@ main {
 .main_cards_item:hover .main_cards_item_button {
     background-color: #FDDCC4;
     border: 2px solid #FDDCC4;
+} 
+
+.main_cards_item:active .main_cards_item_button {
+    background-color: #F1CDB3;
+    border-color: #F1CDB3;
 }
 
 .main_cards_item_title {
@@ -204,6 +209,8 @@ main {
     cursor: pointer;
     transition: all .2s linear;
 }
+
+
 
 .main_switcher-list {
     display: flex;

@@ -179,6 +179,9 @@ header {
     background-color: #FDDCC4;
 }
 
+.header_intro_button:active {
+    background-color: #F1CDB3;
+}
 
 .header_image {
     align-self: flex-end;
@@ -285,6 +288,11 @@ section {
     transform: rotate(180deg);
 }
 
+.section_pets_selection_arrow:active {
+    background-color: #F1CDB3;
+    border-color: #F1CDB3;
+}
+
 .section_pets_cards {
     display: flex;
     gap: 90px;
@@ -332,6 +340,12 @@ section {
     transition: all .2s linear;
 }
 
+.section_pets_card:active .section_pets_card_button{
+    background-color: #F1CDB3;
+    border-color: #F1CDB3;
+}
+
+
 .section_pets_button {
     margin-top: 2px;
     padding: 16px 45px;
@@ -350,6 +364,13 @@ section {
 .section_pets_button:hover {
     background-color: #FDDCC4;
 }
+
+.section_pets_button:active {
+    background-color: #F1CDB3;
+}
+
+
+
 
 
 /*    HELP     */
