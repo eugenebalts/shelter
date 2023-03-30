@@ -345,7 +345,6 @@ section {
     border-color: #F1CDB3;
 }
 
-
 .section_pets_button {
     margin-top: 2px;
     padding: 16px 45px;
@@ -368,9 +367,6 @@ section {
 .section_pets_button:active {
     background-color: #F1CDB3;
 }
-
-
-
 
 
 /*    HELP     */
