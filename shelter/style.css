@@ -125,10 +125,6 @@ header {
     opacity: 1;
 }
 
-.header_navigation_link:hover {
-    color: #FAFAFA;
-}
-
 .header_navigation li:active:after{
     opacity: 1;
 }
@@ -173,10 +169,6 @@ header {
     border: none;
     cursor: pointer;
     transition: all .2s linear;
-}
-
-.header_intro_button:hover {
-    background-color: #FDDCC4;
 }
 
 .header_intro_button:active {
@@ -295,6 +287,7 @@ section {
 
 .section_pets_cards {
     display: flex;
+    flex-wrap: wrap;
     gap: 90px;
 }
 
@@ -309,10 +302,6 @@ section {
     cursor: pointer;
     border-radius: 9px;
     transition: all .2s linear;
-}
-
-.section_pets_card:hover {
-    background-color: #FFFFFF;
 }
 
 .section_pets_card:hover .section_pets_card_button {
@@ -358,10 +347,6 @@ section {
     border: none;
     cursor: pointer;
     transition: all .2s linear;
-}
-
-.section_pets_button:hover {
-    background-color: #FDDCC4;
 }
 
 .section_pets_button:active {
@@ -491,10 +476,6 @@ section {
     gap: 30px;
 }
 
-.section_donation_image {
-
-}
-
 .section_donation_info {
     max-width: 380px;
     display: flex;
@@ -529,10 +510,6 @@ section {
     color: #545454;
     border-radius: 9px;
     transition: all .2s linear;
-}
-
-.section_donation_card:hover{
-    background-color: #FDDCC4;
 }
 
 .section_donation_description {
@@ -590,8 +567,6 @@ footer {
     opacity: 0.7;
 } 
 
-
-
 .footer_image {
     margin: 0 0 -60px 17px;;
     display: flex;
@@ -599,6 +574,109 @@ footer {
     align-self: flex-end;
 }
 
+/* ------------- HOVER RULES -------------*/
+
+@media (hover:hover) {
+    .header_navigation_link:hover {
+        color: #FAFAFA;
+    }
+
+    .header_intro_button:hover {
+        background-color: #FDDCC4;
+    }
+
+    .section_pets_card:hover {
+        background-color: #FFFFFF;
+    }
+
+    .section_pets_button:hover {
+        background-color: #FDDCC4;
+    }
+
+    .section_donation_card:hover{
+        background-color: #FDDCC4;
+    }
+
+    .footer_email:hover, .footer_number:hover, .footer_street:hover {
+        opacity: 0.7;
+    } 
+}
+
+/* --------------- MEDIA 768px -----------*/
+
+@media (max-width: 768px) {
+    
+    .container {
+        max-width: 708px;
+    }
+
+    /* HEADER */
+
+    header {
+        height: 100%;
+    }
+
+    .header_intro {
+        padding-top: 50px;
+        flex-direction: column;
+    }
+
+    .header_intro form {
+        display: flex;
+        justify-content: center;
+    }
+
+    .header_image {
+        max-width: 569px;
+        max-height: 593px;
+        margin-top: 60px;
+    }
+
+    /* -------------- MAIN ---------------*/
+
+    /*--- SECTION ABOUT ---*/
+
+    .section_about .container {
+    }
+
+    .section_about_wrapper {
+        padding: 0;
+        margin: 0 auto;
+        max-width: 430px;
+        flex-direction: column;
+        align-items: center;
+        gap: 80px;
+    }
+
+    .section_about_image {
+        order: 2;
+    }
+
+    /* ---- SECTION PETS ---- */
+
+    .section_pets_wrapper {
+        max-width: 100%;
+    }
+
+    .section_pets_cards {
+        gap: 40px;
+    }
+
+    .section_pets_card:nth-last-child(1) {
+        display: none;
+    }
+
+
+    /* ---- SECTION HELP ---- */
+
+    
+
+
+    footer {
+        display: none;
+    }
+
+}
 
 
 
