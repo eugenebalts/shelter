@@ -368,17 +368,15 @@ section {
 }
 
 .section_help_list {
-    margin-top: 65px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     list-style: none;
     justify-content: center;
-    gap: 120px;
+    gap: 55px 120px;
 }
 
 .section_help_list_item {
-    margin-top: -65px;
     text-align: center;
 }
 
@@ -669,7 +667,14 @@ footer {
 
     /* ---- SECTION HELP ---- */
 
-    
+    .section_help_list {
+        max-width: 630px;
+        gap: 55px 60px;
+    }
+
+    .section_help_list_item {
+        width: 170px;
+    }
 
 
     footer {
