@@ -27,18 +27,11 @@ body {
 }
 
 
-/* header {
-    height: 908px;
-    background-image: url(assets/headerback.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-} */
+/* HEADER */
 
 header {
     background: radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, #211F20;
 }
-
 
 .header_wrapper {
     height: 100%;
@@ -132,30 +125,26 @@ header {
 }
 
 .header_intro {
-    flex-grow: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     gap: 42px;
 }
 
 .header_intro_info {
-    margin: 0 auto 80px;
+    margin-bottom: 80px;
     display: flex;
     flex-direction: column;
     gap: 42px;
 }
 
 .header_intro_title {
-    width:  310px;
     font-size: 44px;
     line-height: 1.3em;
     color: white;
 }
 
 .header_intro_subtitle {
-    max-width: 460px;
     line-height: 1.6em;
     color: #CDCDCD;
 }
@@ -180,14 +169,18 @@ header {
 }
 
 .header_image {
-    /* margin: 0 auto; */
+    display: flex;
     align-self: flex-end;
-    height: 728px;
-    width: 698px;
-    background-image: url(assets/dog.png);
-    background-size: cover;
-    background-repeat: no-repeat;
+}
 
+.header_image {
+    max-width: 698px;
+    max-height: 728px;
+}
+
+.header_image img {
+    min-height: 100%;
+    min-width: 100%;
 }
 
 
@@ -207,11 +200,12 @@ section {
 /* ABOUT */
 
 .section_about_wrapper {
+    max-width: 430px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
-    padding: 0 175px;
     gap: 120px;
 }
 
@@ -296,7 +290,6 @@ section {
 
 .section_pets_cards {
     display: flex;
-    flex-wrap: wrap;
     gap: 90px;
 }
 
@@ -401,76 +394,6 @@ section {
     color: #545454;
 }
 
-/* .section_help_list {
-    width: 100%;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-row-gap: 60px;
-}
-
-.section_help_list_item:nth-child(1) {
-    grid-column-start: 1;
-    grid-column-end: 3;
-}
-
-.section_help_list_item:nth-child(2) {
-    grid-column-start: 3;
-    grid-column-end: 5;
-}
-
-.section_help_list_item:nth-child(3) {
-    grid-column-start: 5;
-    grid-column-end: 7;
-}
-
-.section_help_list_item:nth-child(4) {
-    grid-column-start: 7;
-    grid-column-end: 9;
-}
-
-.section_help_list_item:nth-child(5) {
-    grid-column-start: 9;
-    grid-column-end: 11;
-}
-
-.section_help_list_item:nth-child(6) {
-    grid-column-start: 2;
-    grid-column-end: 4;
-}
-
-.section_help_list_item:nth-child(7) {
-    grid-column-start: 4;
-    grid-column-end: 6;
-}
-
-.section_help_list_item:nth-child(8) {
-    grid-column-start: 6;
-    grid-column-end: 8;
-}
-
-.section_help_list_item:nth-child(9) {
-    grid-column-start: 8;
-    grid-column-end: 10;
-}
-
-.section_help_list_item {
-    text-align: center;
-}
-
-.section_help_list_item  img{
-    margin-bottom: 30px;
-}
-
-.section_help_list_item_title {
-    font-size: 20px;
-    font-family: Georgia;
-    letter-spacing: 0.06em;
-    color: #545454;
-} */
-
-
 /* DONATION */ 
 
 .section_donation {
@@ -478,22 +401,22 @@ section {
 }
 
 .section_donation_wrapper {
+    margin: 0 auto;
+    max-width: 905px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     gap: 30px;
 }
 
 .section_donation_info {
-    max-width: 380px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
 .section_donation .section_title {
-    max-width: 300px;
+    margin-right: 80px;
 }
 
 .section_donation_subtitle {
@@ -541,7 +464,6 @@ footer {
     display: flex;
     justify-content: center;
     gap: 65px 160px;
-    flex-wrap: wrap;
 }
 
 .footer_contacts {
@@ -630,16 +552,79 @@ footer {
 }
 
 
-/* ---- MEDIA 1024 -----*/
+/* ---- MEDIA 1220 -----*/
 
-@media (max-width: 1220px) {
+@media (max-width: 1279px) {
+
     .container {
-        max-width: 90%;
+        max-width: 92%;
+    }
+
+    .header_wrapper {
+        gap: 50px;
     }
 
     .header_intro form {
         margin: 0 auto;
     }
+
+    .header_intro {
+        flex-direction: column;
+    }
+    
+    .header_image {
+        max-width: 569px;
+        max-height: 593px;
+        margin-top: 60px;
+    }
+
+    
+    .section_pets_cards {
+        gap: 80px;
+    }
+
+    .section_pets_card:nth-last-child(1) {
+        display: none;
+    }
+
+    .section_help_list {
+        /* max-width: 630px; */
+        gap: 55px 60px;
+    }
+
+    .section_donation_info {
+        padding: 0 164px;
+    }
+
+    .section_donation_wrapper {
+        flex-direction: column;
+    }
+
+    .section_donation_image {
+        order: 2;
+    }
+
+    .footer_wrapper {
+        padding: 30px 35px 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 65px 60px;
+    }
+
+    .footer_contacts {
+        min-height: 234px;
+        margin: 0;
+        gap: 47px;
+    }
+
+    .footer_image {
+        align-self: center;
+        margin: 0;
+    }
+
+
 }
 
 /* --------------- MEDIA 768px -----------*/
@@ -661,26 +646,14 @@ footer {
     }
 
     .header_intro_info {
-        margin: 0 auto;
+        margin: 0 124px;
     }
 
-    .header_intro form {
-        display: flex;
-        justify-content: center;
-    }
 
-    .header_image {
-        max-width: 569px;
-        max-height: 593px;
-        margin-top: 60px;
-    }
 
     /* -------------- MAIN ---------------*/
 
     /*--- SECTION ABOUT ---*/
-
-    .section_about .container {
-    }
 
     .section_about_wrapper {
         padding: 0;
@@ -704,6 +677,7 @@ footer {
         gap: 40px;
     }
 
+
     .section_pets_card:nth-last-child(1) {
         display: none;
     }
@@ -711,10 +685,6 @@ footer {
 
     /* ---- SECTION HELP ---- */
 
-    .section_help_list {
-        max-width: 630px;
-        gap: 55px 60px;
-    }
 
     .section_help_list_item {
         width: 170px;
@@ -725,7 +695,7 @@ footer {
 
     .section_donation_wrapper {
         flex-direction: column;
-        gap: 60px;
+        gap: 60px;  
     }
 
     .section_donation_info {
@@ -738,23 +708,8 @@ footer {
 
     /* --- FOOTER --- */
 
-    .footer_wrapper {
-        padding: 30px 35px 0;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 65px 60px;
-    }
-
-    .footer_contacts {
-        min-height: 234px;
-        margin: 0;
-        gap: 47px;
-    }
-
-    .footer_image {
-        margin: 0;
-    }
 }
+
 
 
 
