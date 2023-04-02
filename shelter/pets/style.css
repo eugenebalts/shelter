@@ -126,9 +126,6 @@ header {
     opacity: 1;
 }
 
-.header_navigation_link:hover {
-    color: #292929;
-}
 
 
 /*    MAIN    */
@@ -137,7 +134,6 @@ main {
     padding: 80px 0 100px;
     flex: 1 0 auto;
     background-color: #F6F6F6;
-
 }
 
 .main_wrapper {
@@ -158,8 +154,8 @@ main {
 
 .main_cards_list {
     display:flex;
-    justify-content: space-between;
-    gap: 30px 0;
+    justify-content: center;
+    gap: 30px 40px;
     flex-wrap: wrap;
     list-style: none;
 }
@@ -181,10 +177,6 @@ main {
     background-color: #FFFFFF;
 }
 
-.main_cards_item:hover .main_cards_item_button {
-    background-color: #FDDCC4;
-    border: 2px solid #FDDCC4;
-}
 
 .main_cards_item_title {
     margin-top: -4px;
@@ -241,11 +233,6 @@ main {
     border-color: #F1CDB3;
 }
 
-.main_switcher_item.next:hover, .main_switcher_item.last:hover {
-    background-color: #FDDCC4;
-    border-color: #FDDCC4;
-}
-
 
 .main_switcher_item.next:active, .main_switcher_item.last:active {
     border-color: #F1CDB3;
@@ -253,57 +240,46 @@ main {
 }
 
 
-/* .main_cards__item__title {
-    margin-top: -4px;
-    font-size: 20px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #545454;
-}
-
-.main_cards__item_button {
-    padding: 13px 43px;
-    font-family: Georgia;
-    font-size: 17px;
-    letter-spacing: 0.06em;
-    color: #292929;
-    background-color: transparent;
-    border-radius: 100px;
-    border: 2px solid #F1CDB3;
-    cursor: pointer;
-    transition: all .2s linear;
-} */
-
-
-
-
-
-
-
-
-
 
 footer {
-    /* flex: 0 0 auto; */
     background: radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
+    /* height: 100%; */
 }
 
 .footer_wrapper {
     padding: 40px 0 60px;
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 140px;
+    justify-content: center;
+    gap: 65px 160px;
 }
 
+.footer_contacts {
+    max-width: 740px;
+    margin-top: 16px;
+    display: flex;
+    gap: 142px;
+}
+
+.footer_contacts_info, .footer_contacts_address {
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: space-between;
+    line-height: 23px;
+    letter-spacing: 0.06em;
+}
+/* 
 .footer_contacts, .footer_address {
-    height: 234px;
-    /* padding-top: 10px;  */
+    min-height: 234px;
+    max-width: 302px;
+    padding-top: 10px; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     line-height: 23px;
     letter-spacing: 0.06em;
-}
+} */
 
 .footer_title {
     font-size: 35px;
@@ -328,11 +304,89 @@ footer {
     opacity: 0.7;
 } 
 
-
-
 .footer_image {
-    margin: 0 0 -60px 17px;;
+    margin-bottom: -60px;
     display: flex;
-    align-items: flex-end;
     align-self: flex-end;
 }
+
+
+/* _--- HOVER RULES --------*/
+
+@media (hover:hover) {
+
+    .header_navigation_link:hover {
+        color: #292929;
+    }
+
+    .main_cards_item:hover .main_cards_item_button {
+        background-color: #FDDCC4;
+        border: 2px solid #FDDCC4;
+    }
+
+    .main_switcher_item.next:hover, .main_switcher_item.last:hover {
+        background-color: #FDDCC4;
+        border-color: #FDDCC4;
+    }
+
+    .footer_email:hover, .footer_number:hover, .footer_street:hover {
+        opacity: 0.7;
+    } 
+}
+
+
+/* ---- MEDIA 1280 -------*/
+
+@media (max-width: 1279px) {
+
+    .container {
+        max-width: 92%;
+    }
+
+    main {
+        padding: 80px 0 76px;
+    }
+
+    .main_wrapper {
+        gap: 30px;
+    }
+
+    .main_cards_list {
+        margin-bottom: 12px;
+    }
+
+    .main_cards_item:nth-last-child(1), .main_cards_item:nth-last-child(2)  {
+        display: none;
+    }
+
+
+    .footer_wrapper {
+        padding: 30px 35px 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 65px 60px;
+    }
+
+    .footer_contacts {
+        min-height: 234px;
+        margin: 0;
+        gap: 47px;
+    }
+
+    .footer_image {
+        align-self: center;
+        margin: 0;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 708px;
+    }
+}
+
+
+
