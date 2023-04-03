@@ -368,7 +368,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 60px;
+    gap: 58px;
 }
 
 .section_help .section_title {
@@ -405,6 +405,10 @@ section {
 
 .section_donation {
     background-color: #F6F6F6;
+}
+
+.section_donation .container {
+    padding-right: 12px;
 }
 
 .section_donation_wrapper {
@@ -612,7 +616,7 @@ footer {
     }
 
     .section_donation_info {
-        padding: 0 164px;
+        max-width: 380px;
     }
 
     .section_donation_wrapper {
@@ -706,12 +710,15 @@ footer {
 
 
     .section_help_list_item {
-        max-width: 170px;
+        flex-basis: 170px;
     }
 
 
     /* ---- SECTION DONATION ----*/
 
+    .section_donation .container {
+        padding: 0;
+    }
     .section_donation_wrapper {
         flex-direction: column;
         gap: 60px;  
@@ -826,15 +833,78 @@ footer {
         max-height: 50px;
     }
 
+    .section_help_list_item_title {
+        font-size: 15px;
+    }
 
+    .section_donation_wrapper {
+        gap: 40px;
+    }
 
-    .section_donation {
-        display: none;
+    .section_donation_info {
+        max-width: 300px;
+        /* padding: 0 10px; */
+        align-items: center;
+        font-size: 15px;
+        gap: 23px;
+    }
+
+    .section_donation .section_title {
+        margin: 0;
+    }
+
+    .section_donation_subtitle {
+        letter-spacing: unset;
+        text-align: justify;
+        max-width: 280px;
+    }
+
+    .section_donation_description {
+        padding: 0 10px;
+        text-align: justify;
+    }
+
+    .section_donation_card {
+        font-size: 15px;
     }
 
 
-    footer {
-        display: none;
+    .section_donation_image img{
+        /* max-width: 260px; */
+        max-height: 135.2px;
+    }
+
+    .footer_wrapper {
+        padding: 30px 0 0;
+        gap: 42px;
+    }
+
+    .footer_contacts {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .footer_contacts_info {
+        align-items: center;
+        padding: 0 10px;
+        text-align: center;
+        gap: 43px;
+    }
+
+    .footer_contacts_address {
+        gap: 40px;
+    }
+
+
+    .footer_contacts_info .footer_title, .footer_contacts_address .footer_title {
+        padding: 0 15px;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .footer_image img {
+        max-width: 260px;
     }
 }
 
@@ -871,16 +941,17 @@ footer {
     }
 
     .section_about_subtitle:nth-last-child(1) {
-        margin-top: -3px;
+        margin-top: -3px; /* DELETE THIS AFTER DEADLINED */
     }
 
     .section_help_list {
         justify-content: unset;
     }
 
-    .section_help_list_item_title {
-        width: 130px;
-        font-size: 15px;
+    .footer_contacts_info .footer_title, .footer_contacts_address .footer_title {
+        font-size: 25px;
+        text-align: center;
+        line-height: 127%;
     }
 }
 
