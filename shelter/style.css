@@ -660,6 +660,18 @@ footer {
 
     /* HEADER */
 
+    .header_burger {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .header_burger div {
+        width: 30px;
+        height: 2px;
+        background-color: #F1CDB3;
+    }
+
     .header_wrapper {
         gap: 50px;
     }
