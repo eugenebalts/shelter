@@ -1,2 +1,37 @@
-console.log('Самостоятельная оценка: \nВёрстка страницы Main соответствует макету при ширине экрана 1280px: +14\nВёрстка страницы Main соответствует макету при ширине экрана 768px: +14\nВёрстка страницы Main соответствует макету при ширине экрана 320px: +14\nВёрстка страницы Main соответствует макету при ширине экрана 320px: +14\nВёрстка страницы Pets соответствует макету при ширине экрана 768px: +6\nВёрстка страницы Pets соответствует макету при ширине экрана 320px: +6\nНи на одном из разрешений до 320px включительно не появляется горизонтальная полоса прокрутки, справа от отдельных блоков не появляются белые поля. Весь контент страницы при этом сохраняется: не обрезается и не удаляется: +20\n Верстка резиновая: при плавном изменении размера экрана от 1280px до 320px верстка подстраивается под этот размер, элементы верстки меняют свои размеры и расположение, не наезжают друг на друга, изображения могут менять размер, но сохраняют правильные пропорции: +8\nПри ширине экрана меньше 768px на обеих страницах меню в хедере скрывается, появляется иконка бургер-меню: +4 \nОткрытие меню при клике на иконку бургер-меню на текущем этапе не проверяется!!!\nВерстка обеих страниц валидная: для проверки валидности вёрстки используйте сервис https://validator.w3.org/ : +8')
-console.log('Итого: все пункты выполнены')
+const headerMenu = document.querySelector('.header_navigation');
+const burgerButton = document.querySelector('.header_burger');
+const burgerMenuList = document.querySelector('header_navigation_list');
+const burgerMenuButtons = document.querySelectorAll('.header_navigation li')
+const body = document.querySelector('body')
+
+
+// CLICK ON A BUTTON
+burgerButton.addEventListener('click', () => {
+    headerMenu.classList.toggle('open')
+    body.classList.toggle('menu') // OVERFLOW 
+})
+
+
+//CLICK ON THE LINKS
+
+burgerMenuButtons.forEach(link => {
+    link.addEventListener('click', (e) => {
+        console.log(e.target)
+        if (e.target.closest('.open')) {
+            headerMenu.classList.remove('open')
+            body.classList.remove('menu')
+        }
+    })
+})
+
+// CLICK OVER NAV
+
+window.addEventListener('click', (e) => {
+    if(headerMenu.classList.contains('open')) {
+        if(!e.target.closest('.open')) {
+            headerMenu.classList.remove('open')
+            body.classList.remove('menu')
+        }
+    } 
+})
+
