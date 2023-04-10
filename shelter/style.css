@@ -116,10 +116,6 @@ header {
     color: #FAFAFA;
 }
 
-.header_navigation_list:active a {
-    color: #FAFAFA;
-}
-
 
 .header_navigation_link span {
     padding: 5px 0;
@@ -354,11 +350,11 @@ body.popup {
 
 .section_pets.popup::before{
     position: absolute;
-    top: -100vh;
+    top: -200vh;
     left: 0;
     content: '';
     width: 100vw;
-    height: 300vh;
+    height: 400vh;
     background-color: rgba(41, 41, 41, 0.6);
 }
 
