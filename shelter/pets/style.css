@@ -34,6 +34,10 @@ body {
     height: 100%;
 }
 
+::-webkit-scrollbar {
+    width: 0;
+}
+
 /*          -----------------------         */
 
 header {
@@ -85,17 +89,6 @@ header {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.header_navigation li:after{
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    content: "";
-    background-color: #F1CDB3;
-    height: 3px;
-    width: 100%;
-    transition: all .2s linear;
-    opacity: 0;
-}
 
 .header_navigation li {
     position: relative;
@@ -309,6 +302,125 @@ footer {
 }
 
 
+
+
+
+body.popup {
+    position: relative;
+    overflow: hidden;
+}
+
+.popup_card {
+    position: fixed;
+    display: flex;
+    gap: 30px;
+    width: 900px;
+    height: 500px;
+    top: calc(50% - 250px);
+    left: calc(50% - 450px);
+    margin: 0 auto;
+    /* align-items: center; */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #FAFAFA;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.popup_close-button {
+    position: absolute;
+    top: -52px;
+    right: -42px;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '+';
+    /* background-color: white; */
+    border: 2px solid #F1CDB3;
+    font-size: 30px;
+    font-weight: 600;
+    font-family:'Courier New', Courier, monospace, sans-serif;
+    transform: rotate(45deg);
+    border-radius: 100%;
+    color: #292929;
+    padding: 0px;
+    cursor: pointer;
+    transition: all .2s linear
+}
+
+.popup_close-button:hover {
+    background-color: #F1CDB3;
+}
+
+.popup_card img{
+    width: 500px;
+    border-radius: 9px;
+    /* border-radius: 10px 0px 0px 10px; */
+}
+
+.popup_card_info {
+    display: flex;
+    flex-direction: column;
+    padding: 51px 20px 50px 0;
+    gap: 41px;
+    overflow-y: scroll;
+}
+
+
+.popup_card_title {
+    font-size: 35px;
+    line-height: 45.5px;
+    margin-bottom: 10px;
+    letter-spacing: 0.06em;
+}
+
+.popup_card_subtitle {
+    font-size: 20px;
+    letter-spacing: 0.06em;
+}
+
+.popup_card_description {
+    /* line-height: 14.5px; */
+    letter-spacing: 0.06em;
+}
+
+.popup_card_rest {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    letter-spacing: 0.06em;
+    line-height: 16.5px;
+    list-style: none;
+}
+
+.popup_card_rest li::before {
+    content: '•';
+    color: #F1CDB3;
+    margin-right: 10px;
+
+}
+
+.popup_card_rest span {
+    font-weight: 700;
+}
+
+main {
+    position: relative;
+    background-color: #F6F6F6;
+}
+
+main.popup::before{
+    position: absolute;
+    top: -200vh;
+    left: 0;
+    content: '';
+    width: 100vw;
+    height: 400vh;
+    background-color: rgba(41, 41, 41, 0.6);
+}
+
+
 /* _--- HOVER RULES --------*/
 
 @media (hover:hover) {
@@ -339,6 +451,50 @@ footer {
 
     .container {
         max-width: 92%;
+    }
+
+
+    .popup_card {
+        gap: 11px;
+        width:  630px;
+        height: 350px;
+        top: calc(50% - 175px);
+        left: calc(50% - 315px);
+    }
+
+    .popup_card img {
+        width: 350px; 
+    }
+    
+    .popup_card_info {
+        padding: 10px 5px 10px 0;
+        gap: 21px;
+    }
+    
+
+    .popup_card_title {
+        font-size: 35px;
+        line-height: 45.5px;
+        margin-bottom: 10px;
+        letter-spacing: 0.06em;
+    }
+    
+    .popup_card_subtitle {
+        font-size: 20px;
+        letter-spacing: 0.06em;
+    }
+    
+    .popup_card_description {
+        font-size: 13px;
+        line-height: 14px;
+    }
+    
+    .popup_card_rest {
+        padding-left: 14.5px;
+
+        gap: 6px;
+        letter-spacing: 0.06em;
+        line-height: 16.5px;
     }
 
     main {
@@ -468,6 +624,52 @@ footer {
 
     body.menu {
         overflow: hidden;
+    }
+
+
+        .popup_close-button {
+        right: -30px;
+    }
+
+    .popup_card {
+        gap: 0px;
+        width:  240px;
+        height: 341px;
+        top: calc(50% - 170.5px);
+        left: calc(50% - 120px);
+    }
+
+    .popup_card img {
+        display: none; 
+    }
+    
+    .popup_card_info {
+        padding: 10px;
+        gap: 22px;
+    }
+    
+
+    .popup_card_title {
+
+        text-align: center;
+
+    }
+    
+    .popup_card_subtitle {
+        text-align: center;
+
+        font-size: 20px;
+        letter-spacing: 0.06em;
+    }
+    
+    .popup_card_description {
+        font-size: 13px;
+        line-height: 14px;
+        text-align: justify;
+    }
+    
+    .popup_card_rest {
+        gap: 7px;
     }
 
 
