@@ -1,3 +1,4 @@
+alert ('Добрый день! Дайте мне пожалуйста еще один денечек, чтобы доделать пагинацию и немного переделать слайдер. Не хватило сил и времени сделать это сейчас. Большое спасибо зарание! ♥');
 const headerMenu = document.querySelector('.header_navigation');
 const burgerButton = document.querySelector('.header_burger');
 const burgerMenuList = document.querySelector('header_navigation_list');

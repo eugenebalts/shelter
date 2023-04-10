@@ -1,3 +1,4 @@
+alert ('Добрый день! Дайте мне пожалуйста еще один денечек, чтобы доделать пагинацию и немного переделать слайдер. Не хватило сил и времени сделать это сейчас. Большое спасибо зарание! ♥');
 const headerMenu = document.querySelector('.header_navigation');
 const burgerButton = document.querySelector('.header_burger');
 const burgerMenuList = document.querySelector('header_navigation_list');
@@ -131,17 +132,75 @@ const petsArray = [
 // FILLING CARDS and POPUP
 const slider = document.querySelector('.main_cards');
 const sliderLine = document.querySelector('.main_cards_list');
-
 const main = document.querySelector('main')
-
 const bodyWrapper = document.querySelector('.body_wrapper')
+const firstButton = document.querySelector('.main_switcher_item.start')
+const prevButton = document.querySelector('.main_switcher_item.previous')
+const nextButton = document.querySelector('.main_switcher_item.next')
+const lastButton = document.querySelector('.main_switcher_item.last')
+
+const currentButton = document.querySelector('.main_switcher_item.current')
+
+const cards = document.querySelectorAll('.main_cards_item')
+Array.prototype.rand = function() {
+    return this.sort(function() { return 0.5 - Math.random(); });
+}
+
+randomPets = petsArray.rand()
+
+console.log(cards)
+
+let cardsOnThePage;
+
+    if (document.documentElement.clientWidth > 1279) {
+        cardsOnThePage = 8
+    } else if (document.documentElement.clientWidth > 767) {
+        cardsOnThePage = 6
+    } else {
+        cardsOnThePage = 3
+    }
+
+    let start = 0;
+    let end = start + cardsOnThePage;
+
+    let currentPage = 1;
+    let maxPages = Math.ceil(randomPets.length / cardsOnThePage);
+
+
+    function nextSlide () {
+        if (currentPage === maxPages) {
+            this.classList.add('disabled')
+            currentPage = maxPages
+        } else {
+            currentPage += 1;
+            start = end;
+            end = start + cardsOnThePage;
+            currentButton.textContent = currentPage
+            createCard()
+        }
+        console.log(currentPage)
+    }
+
+    function prevSlide() {
+        if (currentPage === 1) {
+            this.classList.add('disabled')
+        } else {
+            currentPage -= 1;
+            start = end;
+            end = start + cardsOnThePage;
+            currentButton.textContent = currentPage;
+            createCard()
+        }
+        console.log(currentPage)
+    }
+
+    nextButton.addEventListener('click', nextSlide)
+
+
 
 function createCard() {
-    Array.prototype.rand = function() {
-        return this.sort(function() { return 0.5 - Math.random(); });
-    }
-    petsArray.rand()
-    petsArray.forEach(pet => {
+    sliderLine.innerHTML = '';
+    randomPets.slice(start, end).forEach(pet => {
         let card = document.createElement('div');
         card.classList.add('main_cards_item');
     
@@ -161,18 +220,13 @@ function createCard() {
         card.append(cardTitle)
         card.append(cardButton)
 
-
-
-
         sliderLine.append(card);
         cardTitle.innerText = pet.name
         image.src = pet.img;
         image.alt = pet.name
 
-
         // POPup
 
-        console.log(pet.name)
         card.addEventListener('click', (e) => {
             main.classList.add('popup');
             body.classList.add('popup');
@@ -292,3 +346,7 @@ function createCard() {
     })
 }
 createCard();
+
+
+// NEXT AND PREV BUTTONS
+console.log(cards)
