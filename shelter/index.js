@@ -129,13 +129,20 @@ const petsArray = [
     }
 ]
 
-// FILLING CARDS 
+// FILLING CARDS and POPUP
 const slider = document.querySelector('.section_pets_cards');
 const sliderLine = document.querySelector('.section_pets_cards_container');
 
-function createCard() {
-    petsArray.forEach(pet => {
+const sectionPets = document.querySelector('.section_pets')
 
+const bodyWrapper = document.querySelector('.body_wrapper')
+
+function createCard() {
+    Array.prototype.rand = function() {
+        return this.sort(function() { return 0.5 - Math.random(); });
+    }
+    petsArray.rand()
+    petsArray.forEach(pet => {
         let card = document.createElement('div');
         card.classList.add('section_pets_card');
     
@@ -163,11 +170,139 @@ function createCard() {
         image.src = pet.img;
         image.alt = pet.name
 
+
+        // POPup
+
         console.log(pet.name)
+        card.addEventListener('click', (e) => {
+            sectionPets.classList.add('popup');
+            body.classList.add('popup');
+
+            //CARD
+
+            let popupCard = document.createElement('div')
+            popupCard.classList.add('popup_card');
+
+            // IMG 
+
+            let imageCard = document.createElement('img')
+            imageCard.src = pet.img
+
+            popupCard.append(imageCard)
+
+            // TEXT CONTAINER
+
+            let infoCard = document.createElement('div');
+            infoCard.classList.add('popup_card_info');
+
+                // TITLE BLOCK
+
+                let infoMain = document.createElement('div');
+                infoMain.classList.add('popup_card_info_main')
+
+                    //NAME
+
+                    let infoTitle = document.createElement('h2');
+                    infoTitle.classList.add('popup_card_title')
+                    infoTitle.textContent = pet.name;
+                    
+
+                    // SUBTITLE 
+
+                    let infoSubtitle = document.createElement('p');
+                    infoSubtitle.classList.add('popup_card_subtitle');
+                    infoSubtitle.textContent = `${pet.type} - ${pet.breed}`
+
+                    infoMain.append(infoTitle)
+                    infoMain.append(infoSubtitle)
+
+                // DESCRIPTION
+
+                let infoDescription = document.createElement('p')
+                infoDescription.classList.add('popup_card_description')
+                infoDescription.textContent = pet.description
+
+                // REST DATA
+
+                let restInfo = document.createElement('ul')
+                restInfo.classList.add('popup_card_rest')
+
+
+                    let restAge = document.createElement('li');
+                    restAge.textContent = pet.age
+                    let spanAge = document.createElement('span');
+                    spanAge.textContent = 'Age: '
+                    restAge.prepend(spanAge)
+                    restInfo.append(restAge);
+
+                    let restInoculations = document.createElement('li');
+                    restInoculations.textContent = pet.inoculations
+                    let spanInoculations = document.createElement('span');
+                    spanInoculations.textContent = 'Inoculations: '
+                    restInoculations.prepend(spanInoculations)
+                    restInfo.append(restInoculations);
+
+                    let restDiseases = document.createElement('li');
+                    restDiseases.textContent = pet.diseases
+                    let spanDiseases = document.createElement('span');
+                    spanDiseases.textContent = 'Diseases: '
+                    restDiseases.prepend(spanDiseases)
+                    restInfo.append(restDiseases);
+
+                    let restParasites = document.createElement('li');
+                    restParasites.textContent = pet.parasites
+                    let spanParasites = document.createElement('span');
+                    spanParasites.textContent = 'Parasites: '
+                    restParasites.prepend(spanParasites)
+                    restInfo.append(restParasites);
+
+
+
+
+                infoCard.append(infoMain)
+                infoCard.append(infoDescription)
+                infoCard.append(restInfo)
+            
+
+            let popupCloseButton = document.createElement('div')
+            popupCloseButton.classList.add('popup_close-button')
+            popupCloseButton.textContent = '+'
+            popupCard.append(popupCloseButton)
+
+            popupCard.append(infoCard)
+            bodyWrapper.append(popupCard)
+
+            popupCloseButton.addEventListener('click', () => {
+                sectionPets.classList.remove('popup');
+                body.classList.remove('popup');
+                popupCard.remove()
+            })
+
+            bodyWrapper.addEventListener('click', (e) => {
+                if (e.target.closest('.popup_card') || e.target.closest('.section_pets_card')) {
+                    
+                } else {
+                    sectionPets.classList.remove('popup');
+                    body.classList.remove('popup');
+                    popupCard.remove()
+                }
+            })
+
+        })
+
     })
 }
-
 createCard();
+
+// sectionPets.addEventListener('')
+// const popupCloseButton = document.querySelector('.popup_close-button');
+
+// function closePopup() {
+//     console.log('yes')
+//     sectionPets.classList.remove('popup')
+// }
+
+
 
 // NEXT AND PREV BUTTONS
 
@@ -233,8 +368,6 @@ function prevSlide() {
     }
     console.log(`${currentSlide + 1} --- ${currentSlide})`)
 }
-
-
 
 nextButton.addEventListener('click', nextSlide);
 prevButton.addEventListener('click', prevSlide);
