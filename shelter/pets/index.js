@@ -1,4 +1,4 @@
-alert ('Добрый день! Дайте мне пожалуйста еще один денечек, чтобы доделать пагинацию и немного переделать слайдер. Не хватило сил и времени сделать это сейчас. Большое спасибо зарание! ♥');
+// alert ('Добрый день! Дайте мне пожалуйста еще один денечек, чтобы доделать пагинацию и немного переделать слайдер. Не хватило сил и времени сделать это сейчас. Большое спасибо зарание! ♥');
 const headerMenu = document.querySelector('.header_navigation');
 const burgerButton = document.querySelector('.header_burger');
 const burgerMenuList = document.querySelector('header_navigation_list');
@@ -35,8 +35,6 @@ window.addEventListener('click', (e) => {
         }
     } 
 })
-
-
 
 const petsArray = [
     {
@@ -145,13 +143,32 @@ const cards = document.querySelectorAll('.main_cards_item')
 Array.prototype.rand = function() {
     return this.sort(function() { return 0.5 - Math.random(); });
 }
+// --------------------------------------------- ARRAY ------------------------------------------------------/
 
-randomPets = petsArray.rand()
+// randPets = petsArray.rand()
+randomPets = petsArray.rand();
 
-console.log(cards)
+let resultArray = [];
+for (let i = 0; i < 6; i++) {
+    let firstArray = [...petsArray.slice(0, 3)].rand();
+    let secondArray = [...petsArray.slice(3, 6)].rand();
+    let thirdArray = [...petsArray.slice(6, 8)].rand();
+
+    resultArray.push(...firstArray)
+    resultArray.push(...secondArray)
+    resultArray.push(...thirdArray)
+}
+
+// ------------------------------------------------ LOGIC ------------------------------------------------------------/
 
 let cardsOnThePage;
 
+let start;
+let end;
+let currentPage;
+let maxPages;
+
+function cardsForWidth () {
     if (document.documentElement.clientWidth > 1279) {
         cardsOnThePage = 8
     } else if (document.documentElement.clientWidth > 767) {
@@ -159,48 +176,162 @@ let cardsOnThePage;
     } else {
         cardsOnThePage = 3
     }
+    // console.log(cardsOnThePage)
+}
+cardsForWidth ()
 
-    let start = 0;
-    let end = start + cardsOnThePage;
-
-    let currentPage = 1;
-    let maxPages = Math.ceil(randomPets.length / cardsOnThePage);
+start = 0;
+end = start + cardsOnThePage;
+currentPage = 1;
 
 
-    function nextSlide () {
-        if (currentPage === maxPages) {
-            this.classList.add('disabled')
-            currentPage = maxPages
+function startProperties () {
+    firstButton.classList.remove('disabled')
+    prevButton.classList.remove('disabled')
+    nextButton.classList.remove('disabled')
+    lastButton.classList.remove('disabled')
+
+    maxPages = Math.ceil(resultArray.length / cardsOnThePage);
+}
+startProperties()
+
+function checkActivity () {
+    if (currentPage === 1 && currentPage === maxPages) {
+        // console.log(1)
+        firstButton.classList.add('disabled')
+        prevButton.classList.add('disabled')
+        nextButton.classList.add('disabled')
+        lastButton.classList.add('disabled')
+    } else if (currentPage === 1) {
+        firstButton.classList.add('disabled')
+        prevButton.classList.add('disabled')
+    } else if (currentPage === maxPages) {
+        nextButton.classList.add('disabled')
+        lastButton.classList.add('disabled')
+    }
+}
+    checkActivity()
+
+
+    function reloadPage() {
+        cardsForWidth()
+        startProperties()
+        if (end % cardsOnThePage === 0) {
+            currentPage = end / cardsOnThePage
+            start = end - cardsOnThePage
+            // return true
         } else {
+            if (end < currentPage * cardsOnThePage) {
+                for (i = 0; end !== currentPage * cardsOnThePage; i++) {
+                    end += 1;
+                    reloadPage()
+                }
+                currentPage = end / cardsOnThePage
+                start = end - cardsOnThePage
+            } else if (end > currentPage * cardsOnThePage) {
+                for (i = 0; end !== currentPage * cardsOnThePage; i++) {
+                    end -= 1;
+                    reloadPage()
+                }
+            }
+        }
+        currentButton.textContent = currentPage
+        checkActivity()
+        createCard()
+    }
+    // reloadPage()
+
+    window.addEventListener('resize', reloadPage);
+
+
+    function nextSlide (e) {
+
+
+        if (e.target.classList.contains('disabled')) {
+            return false
+        } else {
+            main.style.background = "rgba(0,0,0, 0.1)"
+            sliderLine.style.opacity = "0.8"
             currentPage += 1;
+            currentButton.textContent = currentPage;
             start = end;
-            end = start + cardsOnThePage;
-            currentButton.textContent = currentPage
+            // console.log(start)
+            if ((start + cardsOnThePage) >= resultArray.length) {
+                end = resultArray.length
+            } else {
+                end = start + cardsOnThePage;
+            }
+            // console.log(end)
+            firstButton.classList.remove('disabled')
+            prevButton.classList.remove('disabled')
             createCard()
+            checkActivity()
         }
-        console.log(currentPage)
+    }
+    function prevSlide(e) {
+        if (e.target.classList.contains('disabled')) {
+            return false
+        } else {
+            main.style.background = "rgba(0,0,0, 0.1)"
+            sliderLine.style.opacity = "0.8"
+            currentPage -= 1;
+            currentButton.textContent = currentPage;
+            end = start;
+            start = end - cardsOnThePage;
+            nextButton.classList.remove('disabled')
+            lastButton.classList.remove('disabled')
+            createCard()
+            checkActivity()
+        }
+    }
+    function lastSlide (e) {
+        if (e.target.classList.contains('disabled')) {
+            return false
+        } else {
+            main.style.background = "rgba(0,0,0, 0.1)"
+            sliderLine.style.opacity = "0.8"
+            currentPage = maxPages;
+            currentButton.textContent = currentPage;
+            start = (maxPages - 1) * cardsOnThePage;
+            // console.log(start)
+            end = resultArray.length
+            // console.log(end)
+            firstButton.classList.remove('disabled')
+            prevButton.classList.remove('disabled')
+            createCard()
+            checkActivity()
+        }
+    }
+    function firstSlide (e) {
+        if (e.target.classList.contains('disabled')) {
+            return false
+        } else {
+            main.style.background = "rgba(0,0,0, 0.1)"
+            sliderLine.style.opacity = "0.8"
+            currentPage = 1;
+            currentButton.textContent = currentPage;
+            start = 0;
+            console.log(start)
+            end = cardsOnThePage;
+            // console.log(end)
+            nextButton.classList.remove('disabled')
+            lastButton.classList.remove('disabled')
+            createCard()
+            checkActivity()
+        }
     }
 
-    function prevSlide() {
-        if (currentPage === 1) {
-            this.classList.add('disabled')
-        } else {
-            currentPage -= 1;
-            start = end;
-            end = start + cardsOnThePage;
-            currentButton.textContent = currentPage;
-            createCard()
-        }
-        console.log(currentPage)
-    }
 
     nextButton.addEventListener('click', nextSlide)
-
+    prevButton.addEventListener('click', prevSlide)
+    lastButton.addEventListener('click', lastSlide)
+    firstButton.addEventListener('click', firstSlide)
 
 
 function createCard() {
+    // cardsForWidth ()
     sliderLine.innerHTML = '';
-    randomPets.slice(start, end).forEach(pet => {
+    resultArray.slice(start, end).forEach(pet => {
         let card = document.createElement('div');
         card.classList.add('main_cards_item');
     
@@ -224,6 +355,11 @@ function createCard() {
         cardTitle.innerText = pet.name
         image.src = pet.img;
         image.alt = pet.name
+
+        setTimeout(() => {
+            main.style.background = "#F6F6F6"
+            sliderLine.style.opacity = "1"
+        }, "300");
 
         // POPup
 
@@ -345,8 +481,5 @@ function createCard() {
 
     })
 }
-createCard();
-
-
-// NEXT AND PREV BUTTONS
-console.log(cards)
+createCard(); 
+    
