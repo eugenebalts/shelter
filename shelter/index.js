@@ -1,4 +1,4 @@
-alert ('Добрый день! Дайте мне пожалуйста еще один денечек, чтобы доделать пагинацию и немного переделать слайдер. Не хватило сил и времени сделать это сейчас. Большое спасибо зарание! ♥');
+// alert ('Добрый день! Дайте мне пожалуйста еще один денечек, чтобы доделать пагинацию и немного переделать слайдер. Не хватило сил и времени сделать это сейчас. Большое спасибо зарание! ♥');
 const headerMenu = document.querySelector('.header_navigation');
 const burgerButton = document.querySelector('.header_burger');
 const burgerMenuList = document.querySelector('header_navigation_list');
@@ -35,9 +35,6 @@ window.addEventListener('click', (e) => {
         }
     } 
 })
-
-
-// PETS - CARDS 
 
 const petsArray = [
     {
@@ -131,52 +128,243 @@ const petsArray = [
 ]
 
 // FILLING CARDS and POPUP
-const slider = document.querySelector('.section_pets_cards');
-const sliderLine = document.querySelector('.section_pets_cards_container');
-
-const sectionPets = document.querySelector('.section_pets')
-
+const slider = document.querySelector('.main_cards');
+const sliderLine = document.querySelector('.main_cards_list');
+const main = document.querySelector('main')
 const bodyWrapper = document.querySelector('.body_wrapper')
+const firstButton = document.querySelector('.main_switcher_item.start')
+const prevButton = document.querySelector('.main_switcher_item.previous')
+const nextButton = document.querySelector('.main_switcher_item.next')
+const lastButton = document.querySelector('.main_switcher_item.last')
+
+const currentButton = document.querySelector('.main_switcher_item.current')
+
+const cards = document.querySelectorAll('.main_cards_item')
+Array.prototype.rand = function() {
+    return this.sort(function() { return 0.5 - Math.random(); });
+}
+// --------------------------------------------- ARRAY ------------------------------------------------------/
+
+// randPets = petsArray.rand()
+randomPets = petsArray.rand();
+
+let resultArray = [];
+for (let i = 0; i < 6; i++) {
+    let firstArray = [...petsArray.slice(0, 3)].rand();
+    let secondArray = [...petsArray.slice(3, 6)].rand();
+    let thirdArray = [...petsArray.slice(6, 8)].rand();
+
+    resultArray.push(...firstArray)
+    resultArray.push(...secondArray)
+    resultArray.push(...thirdArray)
+}
+
+// ------------------------------------------------ LOGIC ------------------------------------------------------------/
+
+let cardsOnThePage;
+
+let start;
+let end;
+let currentPage;
+let maxPages;
+
+function cardsForWidth () {
+    if (document.documentElement.clientWidth > 1279) {
+        cardsOnThePage = 8
+    } else if (document.documentElement.clientWidth > 767) {
+        cardsOnThePage = 6
+    } else {
+        cardsOnThePage = 3
+    }
+    // console.log(cardsOnThePage)
+}
+cardsForWidth ()
+
+start = 0;
+end = start + cardsOnThePage;
+currentPage = 1;
+
+
+function startProperties () {
+    firstButton.classList.remove('disabled')
+    prevButton.classList.remove('disabled')
+    nextButton.classList.remove('disabled')
+    lastButton.classList.remove('disabled')
+
+    maxPages = Math.ceil(resultArray.length / cardsOnThePage);
+}
+startProperties()
+
+function checkActivity () {
+    if (currentPage === 1 && currentPage === maxPages) {
+        // console.log(1)
+        firstButton.classList.add('disabled')
+        prevButton.classList.add('disabled')
+        nextButton.classList.add('disabled')
+        lastButton.classList.add('disabled')
+    } else if (currentPage === 1) {
+        firstButton.classList.add('disabled')
+        prevButton.classList.add('disabled')
+    } else if (currentPage === maxPages) {
+        nextButton.classList.add('disabled')
+        lastButton.classList.add('disabled')
+    }
+}
+    checkActivity()
+
+
+    function reloadPage() {
+        cardsForWidth()
+        startProperties()
+        if (end % cardsOnThePage === 0) {
+            currentPage = end / cardsOnThePage
+            start = end - cardsOnThePage
+            // return true
+        } else {
+            if (end < currentPage * cardsOnThePage) {
+                for (i = 0; end !== currentPage * cardsOnThePage; i++) {
+                    end += 1;
+                    reloadPage()
+                }
+                currentPage = end / cardsOnThePage
+                start = end - cardsOnThePage
+            } else if (end > currentPage * cardsOnThePage) {
+                for (i = 0; end !== currentPage * cardsOnThePage; i++) {
+                    end -= 1;
+                    reloadPage()
+                }
+            }
+        }
+        currentButton.textContent = currentPage
+        checkActivity()
+        createCard()
+    }
+    // reloadPage()
+
+    window.addEventListener('resize', reloadPage);
+
+
+    function nextSlide (e) {
+
+
+        if (e.target.classList.contains('disabled')) {
+            return false
+        } else {
+            main.style.background = "rgba(0,0,0, 0.1)"
+            sliderLine.style.opacity = "0.8"
+            currentPage += 1;
+            currentButton.textContent = currentPage;
+            start = end;
+            // console.log(start)
+            if ((start + cardsOnThePage) >= resultArray.length) {
+                end = resultArray.length
+            } else {
+                end = start + cardsOnThePage;
+            }
+            // console.log(end)
+            firstButton.classList.remove('disabled')
+            prevButton.classList.remove('disabled')
+            createCard()
+            checkActivity()
+        }
+    }
+    function prevSlide(e) {
+        if (e.target.classList.contains('disabled')) {
+            return false
+        } else {
+            main.style.background = "rgba(0,0,0, 0.1)"
+            sliderLine.style.opacity = "0.8"
+            currentPage -= 1;
+            currentButton.textContent = currentPage;
+            end = start;
+            start = end - cardsOnThePage;
+            nextButton.classList.remove('disabled')
+            lastButton.classList.remove('disabled')
+            createCard()
+            checkActivity()
+        }
+    }
+    function lastSlide (e) {
+        if (e.target.classList.contains('disabled')) {
+            return false
+        } else {
+            main.style.background = "rgba(0,0,0, 0.1)"
+            sliderLine.style.opacity = "0.8"
+            currentPage = maxPages;
+            currentButton.textContent = currentPage;
+            start = (maxPages - 1) * cardsOnThePage;
+            // console.log(start)
+            end = resultArray.length
+            // console.log(end)
+            firstButton.classList.remove('disabled')
+            prevButton.classList.remove('disabled')
+            createCard()
+            checkActivity()
+        }
+    }
+    function firstSlide (e) {
+        if (e.target.classList.contains('disabled')) {
+            return false
+        } else {
+            main.style.background = "rgba(0,0,0, 0.1)"
+            sliderLine.style.opacity = "0.8"
+            currentPage = 1;
+            currentButton.textContent = currentPage;
+            start = 0;
+            console.log(start)
+            end = cardsOnThePage;
+            // console.log(end)
+            nextButton.classList.remove('disabled')
+            lastButton.classList.remove('disabled')
+            createCard()
+            checkActivity()
+        }
+    }
+
+
+    nextButton.addEventListener('click', nextSlide)
+    prevButton.addEventListener('click', prevSlide)
+    lastButton.addEventListener('click', lastSlide)
+    firstButton.addEventListener('click', firstSlide)
+
 
 function createCard() {
-    Array.prototype.rand = function() {
-        return this.sort(function() { return 0.5 - Math.random(); });
-    }
-    petsArray.rand()
-    petsArray.forEach(pet => {
+    // cardsForWidth ()
+    sliderLine.innerHTML = '';
+    resultArray.slice(start, end).forEach(pet => {
         let card = document.createElement('div');
-        card.classList.add('section_pets_card');
+        card.classList.add('main_cards_item');
     
         let cardImage = document.createElement('div');
-        cardImage.classList.add('section_pets_card_image');
+        cardImage.classList.add('main_cards__item_image');
         let image = document.createElement('img');
         cardImage.append(image)
     
         let cardTitle = document.createElement('div');
-        cardTitle.classList.add('section_pets_card_title')
+        cardTitle.classList.add('main_cards_item_title')
     
         let cardButton = document.createElement('button');
-        cardButton.classList.add('section_pets_card_button')
+        cardButton.classList.add('main_cards_item_button')
         cardButton.innerText = 'Learn more'
     
         card.append(cardImage)
         card.append(cardTitle)
         card.append(cardButton)
 
-
-
-
         sliderLine.append(card);
         cardTitle.innerText = pet.name
         image.src = pet.img;
         image.alt = pet.name
 
+        setTimeout(() => {
+            main.style.background = "#F6F6F6"
+            sliderLine.style.opacity = "1"
+        }, "300");
 
         // POPup
 
-        console.log(pet.name)
         card.addEventListener('click', (e) => {
-            sectionPets.classList.add('popup');
+            main.classList.add('popup');
             body.classList.add('popup');
 
             //CARD
@@ -274,16 +462,16 @@ function createCard() {
             bodyWrapper.append(popupCard)
 
             popupCloseButton.addEventListener('click', () => {
-                sectionPets.classList.remove('popup');
+                main.classList.remove('popup');
                 body.classList.remove('popup');
                 popupCard.remove()
             })
 
             bodyWrapper.addEventListener('click', (e) => {
-                if (e.target.closest('.popup_card') || e.target.closest('.section_pets_card')) {
+                if (e.target.closest('.popup_card') || e.target.closest('.main_cards_item')) {
                     
                 } else {
-                    sectionPets.classList.remove('popup');
+                    main.classList.remove('popup');
                     body.classList.remove('popup');
                     popupCard.remove()
                 }
@@ -293,88 +481,5 @@ function createCard() {
 
     })
 }
-createCard();
-
-// sectionPets.addEventListener('')
-// const popupCloseButton = document.querySelector('.popup_close-button');
-
-// function closePopup() {
-//     console.log('yes')
-//     sectionPets.classList.remove('popup')
-// }
-
-
-
-// NEXT AND PREV BUTTONS
-
-const nextButton = document.querySelector('.section_pets_selection_arrow.right.normal');
-const prevButton = document.querySelector('.section_pets_selection_arrow.left.normal');
-const nextButtonAdaptive = document.querySelector('.section_pets_selection_arrows_adaptive .right');
-const prevButtonAdaptive = document.querySelector('.section_pets_selection_arrows_adaptive .left')
-const sliderCard = document.querySelector('.section_pets_card')
-
-
-
-let visibleSliderContainerWidth,
-    cardsCount,
-    gapBetweenCards,
-    cardWidth ,
-    fullSliderContainerWidth,
-    maxSlides;
-
-function findProperties() {
-    visibleSliderContainerWidth = parseInt(getComputedStyle(slider,true).width);
-    console.log( 'VISIBLE WIDTH is ' + visibleSliderContainerWidth)
-    cardsCount = petsArray.length;
-    gapBetweenCards = parseInt(getComputedStyle(sliderLine, true).gap)
-    console.log('GAP IS ' + gapBetweenCards)
-    cardWidth = parseInt(getComputedStyle(sliderCard, true).minWidth) // flex basis
-    console.log( 'CARDS WIDTH IS ' + cardWidth)
-
-    fullSliderContainerWidth = cardsCount * cardWidth + ((cardsCount - 1) * gapBetweenCards)
-    console.log('FULL WIDTH is ' + fullSliderContainerWidth)
-    console.log(fullSliderContainerWidth / visibleSliderContainerWidth)
-    maxSlides = Math.round(fullSliderContainerWidth / visibleSliderContainerWidth);
-}
-
-
-findProperties()
-console.log(maxSlides)
-
-let currentSlide = 1;
-
-function nextSlide () {
-    currentSlide += 1;
+createCard(); 
     
-    //We should to find current marginLeft
-
-    if (currentSlide <= maxSlides) {
-        // sliderLine.style.marginLeft = `calc(${parseInt(getComputedStyle(sliderLine, true).marginLeft)}px - ${parseInt(getComputedStyle(slider, true).width) + parseInt(getComputedStyle(sliderLine, true).gap)}px`
-        sliderLine.style.marginLeft = `-${(visibleSliderContainerWidth + gapBetweenCards) * (currentSlide - 1)}px`
-        // console.log(visibleSliderContainerWidth)
-    }  else {
-        currentSlide = 1;
-        sliderLine.style.marginLeft = `0px`
-    }
-    console.log(`${currentSlide - 1} --- ${currentSlide})`)
-}
-
-function prevSlide() {
-    currentSlide -= 1;
-    if (currentSlide >= 1) {
-        sliderLine.style.marginLeft = `-${(visibleSliderContainerWidth + gapBetweenCards) * (currentSlide - 1)}px`
-    } else if (currentSlide < 1) {
-        currentSlide = maxSlides;
-        sliderLine.style.marginLeft = `-${(visibleSliderContainerWidth + gapBetweenCards) * (currentSlide - 1)}px`
-    }
-    console.log(`${currentSlide + 1} --- ${currentSlide})`)
-}
-
-nextButton.addEventListener('click', nextSlide);
-prevButton.addEventListener('click', prevSlide);
-nextButtonAdaptive.addEventListener('click', nextSlide);
-prevButtonAdaptive.addEventListener('click', prevSlide);
-
-window.addEventListener('resize', findProperties)
-window.addEventListener('resize', nextSlide)
-window.addEventListener('resize', prevSlide)
