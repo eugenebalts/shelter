@@ -436,7 +436,7 @@ main.popup::before{
     left: 0;
     content: '';
     width: 100vw;
-    height: 400vh;
+    height: 700vh;
     background-color: rgba(41, 41, 41, 0.6);
 }
 
