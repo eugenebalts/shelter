@@ -17,7 +17,7 @@ burgerButton.addEventListener('click', () => {
 
 burgerMenuButtons.forEach(link => {
     link.addEventListener('click', (e) => {
-        console.log(e.target)
+        // console.log(e.target)
         if (e.target.closest('.open')) {
             headerMenu.classList.remove('open')
             body.classList.remove('menu')

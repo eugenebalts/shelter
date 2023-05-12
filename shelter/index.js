@@ -17,7 +17,6 @@ burgerButton.addEventListener('click', () => {
 
 burgerMenuButtons.forEach(link => {
     link.addEventListener('click', (e) => {
-        console.log(e.target)
         if (e.target.closest('.open')) {
             headerMenu.classList.remove('open')
             body.classList.remove('menu')
@@ -174,7 +173,6 @@ function createCard() {
 
         // POPup
 
-        console.log(pet.name)
         card.addEventListener('click', (e) => {
             sectionPets.classList.add('popup');
             body.classList.add('popup');
@@ -295,15 +293,6 @@ function createCard() {
 }
 createCard();
 
-// sectionPets.addEventListener('')
-// const popupCloseButton = document.querySelector('.popup_close-button');
-
-// function closePopup() {
-//     console.log('yes')
-//     sectionPets.classList.remove('popup')
-// }
-
-
 
 // NEXT AND PREV BUTTONS
 
@@ -324,23 +313,15 @@ let visibleSliderContainerWidth,
 
 function findProperties() {
     visibleSliderContainerWidth = parseInt(getComputedStyle(slider,true).width);
-    console.log( 'VISIBLE WIDTH is ' + visibleSliderContainerWidth)
     cardsCount = petsArray.length;
     gapBetweenCards = parseInt(getComputedStyle(sliderLine, true).gap)
-    console.log('GAP IS ' + gapBetweenCards)
     cardWidth = parseInt(getComputedStyle(sliderCard, true).minWidth) // flex basis
-    console.log( 'CARDS WIDTH IS ' + cardWidth)
-
     fullSliderContainerWidth = cardsCount * cardWidth + ((cardsCount - 1) * gapBetweenCards)
-    console.log('FULL WIDTH is ' + fullSliderContainerWidth)
-    console.log(fullSliderContainerWidth / visibleSliderContainerWidth)
     maxSlides = Math.round(fullSliderContainerWidth / visibleSliderContainerWidth);
 }
 
 
 findProperties()
-console.log(maxSlides)
-
 let currentSlide = 1;
 
 function nextSlide () {
@@ -351,12 +332,11 @@ function nextSlide () {
     if (currentSlide <= maxSlides) {
         // sliderLine.style.marginLeft = `calc(${parseInt(getComputedStyle(sliderLine, true).marginLeft)}px - ${parseInt(getComputedStyle(slider, true).width) + parseInt(getComputedStyle(sliderLine, true).gap)}px`
         sliderLine.style.marginLeft = `-${(visibleSliderContainerWidth + gapBetweenCards) * (currentSlide - 1)}px`
-        // console.log(visibleSliderContainerWidth)
     }  else {
         currentSlide = 1;
         sliderLine.style.marginLeft = `0px`
     }
-    console.log(`${currentSlide - 1} --- ${currentSlide})`)
+
 }
 
 function prevSlide() {
@@ -367,7 +347,6 @@ function prevSlide() {
         currentSlide = maxSlides;
         sliderLine.style.marginLeft = `-${(visibleSliderContainerWidth + gapBetweenCards) * (currentSlide - 1)}px`
     }
-    console.log(`${currentSlide + 1} --- ${currentSlide})`)
 }
 
 nextButton.addEventListener('click', nextSlide);
