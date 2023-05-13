@@ -1,10 +1,8 @@
-// alert ('Добрый день! Дайте мне пожалуйста еще один денечек, чтобы доделать пагинацию и немного переделать слайдер. Не хватило сил и времени сделать это сейчас. Большое спасибо зарание! ♥');
 const headerMenu = document.querySelector('.header_navigation');
 const burgerButton = document.querySelector('.header_burger');
 const burgerMenuList = document.querySelector('header_navigation_list');
 const burgerMenuButtons = document.querySelectorAll('.header_navigation li')
 const body = document.querySelector('body')
-
 
 // CLICK ON A BUTTON
 burgerButton.addEventListener('click', () => {
@@ -12,9 +10,7 @@ burgerButton.addEventListener('click', () => {
     body.classList.toggle('menu') // OVERFLOW 
 })
 
-
 //CLICK ON THE LINKS
-
 burgerMenuButtons.forEach(link => {
     link.addEventListener('click', (e) => {
         if (e.target.closest('.open')) {
@@ -25,7 +21,6 @@ burgerMenuButtons.forEach(link => {
 })
 
 // CLICK OVER NAV
-
 window.addEventListener('click', (e) => {
     if(headerMenu.classList.contains('open')) {
         if(!e.target.closest('.open')) {
@@ -35,9 +30,7 @@ window.addEventListener('click', (e) => {
     } 
 })
 
-
 // PETS - CARDS 
-
 const petsArray = [
     {
         "name": "Jennifer",
@@ -190,24 +183,19 @@ function createCard() {
             popupCard.append(imageCard)
 
             // TEXT CONTAINER
-
             let infoCard = document.createElement('div');
             infoCard.classList.add('popup_card_info');
 
                 // TITLE BLOCK
-
                 let infoMain = document.createElement('div');
                 infoMain.classList.add('popup_card_info_main')
 
                     //NAME
-
                     let infoTitle = document.createElement('h2');
                     infoTitle.classList.add('popup_card_title')
                     infoTitle.textContent = pet.name;
                     
-
                     // SUBTITLE 
-
                     let infoSubtitle = document.createElement('p');
                     infoSubtitle.classList.add('popup_card_subtitle');
                     infoSubtitle.textContent = `${pet.type} - ${pet.breed}`
@@ -216,13 +204,11 @@ function createCard() {
                     infoMain.append(infoSubtitle)
 
                 // DESCRIPTION
-
                 let infoDescription = document.createElement('p')
                 infoDescription.classList.add('popup_card_description')
                 infoDescription.textContent = pet.description
 
                 // REST DATA
-
                 let restInfo = document.createElement('ul')
                 restInfo.classList.add('popup_card_rest')
 
@@ -254,15 +240,11 @@ function createCard() {
                     spanParasites.textContent = 'Parasites: '
                     restParasites.prepend(spanParasites)
                     restInfo.append(restParasites);
-
-
-
-
+            
                 infoCard.append(infoMain)
                 infoCard.append(infoDescription)
                 infoCard.append(restInfo)
-            
-
+         
             let popupCloseButton = document.createElement('div')
             popupCloseButton.classList.add('popup_close-button')
             popupCloseButton.textContent = '+'
@@ -293,9 +275,7 @@ function createCard() {
 }
 createCard();
 
-
 // NEXT AND PREV BUTTONS
-
 const nextButton = document.querySelector('.section_pets_selection_arrow.right.normal');
 const prevButton = document.querySelector('.section_pets_selection_arrow.left.normal');
 const nextButtonAdaptive = document.querySelector('.section_pets_selection_arrows_adaptive .right');
@@ -319,7 +299,6 @@ function findProperties() {
     fullSliderContainerWidth = cardsCount * cardWidth + ((cardsCount - 1) * gapBetweenCards)
     maxSlides = Math.round(fullSliderContainerWidth / visibleSliderContainerWidth);
 }
-
 
 findProperties()
 let currentSlide = 1;
