@@ -1,10 +1,8 @@
-// alert ('Добрый день! Дайте мне пожалуйста еще один денечек, чтобы доделать пагинацию и немного переделать слайдер. Не хватило сил и времени сделать это сейчас. Большое спасибо зарание! ♥');
 const headerMenu = document.querySelector('.header_navigation');
 const burgerButton = document.querySelector('.header_burger');
 const burgerMenuList = document.querySelector('header_navigation_list');
 const burgerMenuButtons = document.querySelectorAll('.header_navigation li')
 const body = document.querySelector('body')
-
 
 // CLICK ON A BUTTON
 burgerButton.addEventListener('click', () => {
@@ -12,9 +10,7 @@ burgerButton.addEventListener('click', () => {
     body.classList.toggle('menu') // OVERFLOW 
 })
 
-
 //CLICK ON THE LINKS
-
 burgerMenuButtons.forEach(link => {
     link.addEventListener('click', (e) => {
         // console.log(e.target)
@@ -26,7 +22,6 @@ burgerMenuButtons.forEach(link => {
 })
 
 // CLICK OVER NAV
-
 window.addEventListener('click', (e) => {
     if(headerMenu.classList.contains('open')) {
         if(!e.target.closest('.open')) {
@@ -162,7 +157,6 @@ for (let i = 0; i < 6; i++) {
 // ------------------------------------------------ LOGIC ------------------------------------------------------------/
 
 let cardsOnThePage;
-
 let start;
 let end;
 let currentPage;
@@ -179,7 +173,6 @@ function cardsForWidth () {
     // console.log(cardsOnThePage)
 }
 cardsForWidth ()
-
 start = 0;
 end = start + cardsOnThePage;
 currentPage = 1;
@@ -239,10 +232,8 @@ function checkActivity () {
         checkActivity()
         createCard()
     }
-    // reloadPage()
 
     window.addEventListener('resize', reloadPage);
-
 
     function nextSlide (e) {
 
@@ -362,7 +353,6 @@ function createCard() {
         }, "300");
 
         // POPup
-
         card.addEventListener('click', (e) => {
             main.classList.add('popup');
             body.classList.add('popup');
